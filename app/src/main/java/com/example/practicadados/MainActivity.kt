@@ -94,7 +94,6 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-
     private fun gestionarTirada(numJugadores:Int){
         binding.Play.setOnClickListener {
             var numero:Int
@@ -104,7 +103,7 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(this@MainActivity,"Lo siento, turno del siguiente",Toast.LENGTH_SHORT).show()
                 pasarTurno(numJugadores,true)
             }else{
-                actualizarPuntuacionActualJugador(binding.jugadorActual.text.toString().toInt(),binding.rondaActual.text.toString().toInt(),numero)
+                actualizarPuntuacionActualJugador(numero)
                 Toast.makeText(this@MainActivity,"Felicidades has anotado $numero",Toast.LENGTH_SHORT).show()
                 binding.pasar.visibility=View.VISIBLE
             }
@@ -115,7 +114,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun pasarTurno(numJugadores: Int, fallo:Boolean){
-        //TODO:implementar ronda++
         if (fallo){
             vaciarPuntuacionActual()
         }
@@ -146,20 +144,27 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun actualizarpuntuaciones(){
-        //TODO:implementar actualizacion de puntuaciones
+        val jugador:Int=binding.jugadorActual.text.toString().toInt()
+        var column:Int=binding.rondaActual.text.toString().toInt()
+        val cellId = resources.getIdentifier("j${jugador}_${column}", "id", packageName)
+        val cellView = binding.casillero.findViewById<TextView>(cellId)
+
     }
-    private fun actualizarPuntuacionActualJugador(row: Int, column: Int, puntos: Int) {
-        var cellId = resources.getIdentifier("j${row}_${column}", "id", packageName)
-        var cellView = binding.casillero.findViewById<TextView>(cellId)
+    private fun actualizarPuntuacionActualJugador(puntos: Int) {
+        val row:Int=binding.jugadorActual.text.toString().toInt()
+        val column:Int=binding.rondaActual.text.toString().toInt()
+        val cellId = resources.getIdentifier("j${row}_${column}", "id", packageName)
+        val cellView = binding.casillero.findViewById<TextView>(cellId)
         cellView?.let {
             it.text = ((it.text.toString().toIntOrNull() ?: 0) + puntos).toString()
         }
     }
+
     private fun vaciarPuntuacionActual(){
-        var row:Int=binding.jugadorActual.text.toString().toInt()
-        var column:Int=binding.rondaActual.text.toString().toInt()
-        var cellId = resources.getIdentifier("j${row}_${column}", "id", packageName)
-        var cellView = binding.casillero.findViewById<TextView>(cellId)
+        val row:Int=binding.jugadorActual.text.toString().toInt()
+        val column:Int=binding.rondaActual.text.toString().toInt()
+        val cellId = resources.getIdentifier("j${row}_${column}", "id", packageName)
+        val cellView = binding.casillero.findViewById<TextView>(cellId)
         cellView?.text = "0"
     }
 }
