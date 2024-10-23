@@ -131,7 +131,7 @@
                 android:layout_height="wrap_content" />
 
             <TextView
-                android:id="@+id/textView14"
+                android:id="@+id/j1Total"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
         </TableRow>
@@ -173,7 +173,7 @@
                 android:layout_height="wrap_content" />
 
             <TextView
-                android:id="@+id/textView21"
+                android:id="@+id/j2Total"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
         </TableRow>
@@ -190,32 +190,32 @@
                 android:text="J3" />
 
             <TextView
-                android:id="@+id/textView23"
+                android:id="@+id/j3_1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
             <TextView
-                android:id="@+id/textView24"
+                android:id="@+id/j3_2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
             <TextView
-                android:id="@+id/textView25"
+                android:id="@+id/j3_3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
             <TextView
-                android:id="@+id/textView26"
+                android:id="@+id/j3_4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
             <TextView
-                android:id="@+id/textView27"
+                android:id="@+id/j3_5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
             <TextView
-                android:id="@+id/textView28"
+                android:id="@+id/j3Total"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
         </TableRow>
@@ -232,32 +232,32 @@
                 android:text="J4" />
 
             <TextView
-                android:id="@+id/textView30"
+                android:id="@+id/j4_1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
             <TextView
-                android:id="@+id/textView31"
+                android:id="@+id/j4_2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
             <TextView
-                android:id="@+id/textView32"
+                android:id="@+id/j4_3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
             <TextView
-                android:id="@+id/textView33"
+                android:id="@+id/j4_4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
             <TextView
-                android:id="@+id/textView34"
+                android:id="@+id/j4_5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
             <TextView
-                android:id="@+id/textView35"
+                android:id="@+id/j4Total"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
         </TableRow>

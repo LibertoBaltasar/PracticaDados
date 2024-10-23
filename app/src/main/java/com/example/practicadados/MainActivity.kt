@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -87,11 +88,9 @@ class MainActivity : AppCompatActivity() {
     private fun usarJuego(opcion:Int){
         var opcionSeleccionada=opcion
         binding.selectorJugadores.visibility=View.INVISIBLE
-        var ronda = 0
         opcionSeleccionada++
         aparecerPartida(opcionSeleccionada)
         gestionarTirada(opcionSeleccionada)
-
 
     }
 
@@ -103,19 +102,24 @@ class MainActivity : AppCompatActivity() {
             seleccionarDado(numero)
             if (numero==1){
                 Toast.makeText(this@MainActivity,"Lo siento, turno del siguiente",Toast.LENGTH_SHORT).show()
-                pasarTurno(numJugadores)
+                pasarTurno(numJugadores,true)
             }else{
+                actualizarPuntuacionActualJugador(binding.jugadorActual.text.toString().toInt(),binding.rondaActual.text.toString().toInt(),numero)
                 Toast.makeText(this@MainActivity,"Felicidades has anotado $numero",Toast.LENGTH_SHORT).show()
                 binding.pasar.visibility=View.VISIBLE
             }
         }
         binding.pasar.setOnClickListener {
-            pasarTurno(numJugadores)
+            pasarTurno(numJugadores,false)
         }
     }
 
-    private fun pasarTurno(numJugadores: Int){
+    private fun pasarTurno(numJugadores: Int, fallo:Boolean){
         //TODO:implementar ronda++
+        if (fallo){
+            vaciarPuntuacionActual()
+        }
+        actualizarpuntuaciones()
         binding.pasar.visibility=View.INVISIBLE
         if (numJugadores>=binding.jugadorActual.text.toString().toInt()+1){
             binding.jugadorActual.text=(binding.jugadorActual.text.toString().toInt()+1).toString()
@@ -139,5 +143,23 @@ class MainActivity : AppCompatActivity() {
 
     private fun tirarDado(): Int {
         return Random.nextInt(1, 7)
+    }
+
+    private fun actualizarpuntuaciones(){
+        //TODO:implementar actualizacion de puntuaciones
+    }
+    private fun actualizarPuntuacionActualJugador(row: Int, column: Int, puntos: Int) {
+        var cellId = resources.getIdentifier("j${row}_${column}", "id", packageName)
+        var cellView = binding.casillero.findViewById<TextView>(cellId)
+        cellView?.let {
+            it.text = ((it.text.toString().toIntOrNull() ?: 0) + puntos).toString()
+        }
+    }
+    private fun vaciarPuntuacionActual(){
+        var row:Int=binding.jugadorActual.text.toString().toInt()
+        var column:Int=binding.rondaActual.text.toString().toInt()
+        var cellId = resources.getIdentifier("j${row}_${column}", "id", packageName)
+        var cellView = binding.casillero.findViewById<TextView>(cellId)
+        cellView?.text = "0"
     }
 }
