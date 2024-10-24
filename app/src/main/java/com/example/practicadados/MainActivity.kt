@@ -17,6 +17,7 @@ import com.example.practicadados.databinding.ActivityMainBinding
 import java.io.File
 import java.io.FileInputStream
 import kotlin.random.Random
+import kotlin.text.toIntOrNull
 
 class MainActivity : AppCompatActivity() {
     //binding
@@ -117,7 +118,7 @@ class MainActivity : AppCompatActivity() {
         if (fallo){
             vaciarPuntuacionActual()
         }
-        actualizarpuntuaciones()
+        actualizarPuntuacionFinal()
         binding.pasar.visibility=View.INVISIBLE
         if (numJugadores>=binding.jugadorActual.text.toString().toInt()+1){
             binding.jugadorActual.text=(binding.jugadorActual.text.toString().toInt()+1).toString()
@@ -143,12 +144,17 @@ class MainActivity : AppCompatActivity() {
         return Random.nextInt(1, 7)
     }
 
-    private fun actualizarpuntuaciones(){
-        val jugador:Int=binding.jugadorActual.text.toString().toInt()
-        var column:Int=binding.rondaActual.text.toString().toInt()
+    private fun actualizarPuntuacionFinal() {
+        val jugador: Int = binding.jugadorActual.text.toString().toInt()
+        val column: Int = binding.rondaActual.text.toString().toInt()
         val cellId = resources.getIdentifier("j${jugador}_${column}", "id", packageName)
         val cellView = binding.casillero.findViewById<TextView>(cellId)
-
+        val cellFinalId = resources.getIdentifier("j${jugador}Total", "id", packageName)
+        val cellFinalView = binding.casillero.findViewById<TextView>(cellFinalId)
+        val valor1 = cellView?.text.toString().toIntOrNull() ?: 0
+        val valor2 = cellFinalView?.text.toString().toIntOrNull() ?: 0
+        val suma = valor1 + valor2
+        cellFinalView?.text = suma.toString()
     }
     private fun actualizarPuntuacionActualJugador(puntos: Int) {
         val row:Int=binding.jugadorActual.text.toString().toInt()
