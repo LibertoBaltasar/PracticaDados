@@ -143,21 +143,37 @@ class MainActivity : AppCompatActivity() {
         binding.pasar.visibility=View.INVISIBLE
         binding.Play.visibility = View.INVISIBLE
         binding.indicadorEstado.visibility = View.INVISIBLE
-        binding.mensajeVictoria.text="Has ganado la partida jugador:${seleccionarGanador()}"
+        var ganador=seleccionarGanador()
+        if (ganador.length==1) {
+            binding.mensajeVictoria.text = "Has ganado la partida jugador: ${seleccionarGanador()}"
+        }else{
+            binding.mensajeVictoria.text = "Han ganado la partida los jugadores: ${seleccionarGanador()}"
+        }
         binding.mensajeVictoria.visibility=View.VISIBLE
         binding.imagenDado.setImageDrawable(ContextCompat.getDrawable(this, R.drawable.dadovictoria))
 //        binding.reset.visibility=View.VISIBLE
 //        reiniciarPartida()
     }
 
-    private fun seleccionarGanador():Int{
-        val puntuaciones = listOf(
+    private fun seleccionarGanador(): String {
+        val puntuaciones = mutableListOf<Int>(
             binding.j1Total.text.toString().toIntOrNull() ?: 0,
             binding.j2Total.text.toString().toIntOrNull() ?: 0,
-            binding.j3Total.text.toString().toIntOrNull() ?: 0,
-            binding.j4Total.text.toString().toIntOrNull() ?: 0
+            binding.j3Total.text.toString().toIntOrNull() ?: -1,
+            binding.j4Total.text.toString().toIntOrNull() ?: -1
         )
 
+        var ganadores = verJugadorMaxPuntuacion(puntuaciones).toString()
+        var maxPuntuacion = puntuaciones[verJugadorMaxPuntuacion(puntuaciones)-1]
+        for (i in 1..<puntuaciones.size) {
+            if(puntuaciones[i] == maxPuntuacion){
+                ganadores += ", ${(i + 1)}"
+            }
+        }
+        return ganadores
+    }
+
+    private fun verJugadorMaxPuntuacion(puntuaciones: List<Int>): Int {
         var ganador = 0
         var maxPuntuacion = puntuaciones[0]
 
